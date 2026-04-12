@@ -1,23 +1,28 @@
 version: 1
 project:
   title: ゲーム理論
+  description: 城西大学理学部情報数理学科2年生対象科目
   authors:
     - name: Keiichiro Kagawa
-      email: kkagawa@josai.ac.jp
+    - email: kkagawa@josai.ac.jp
+    # - affiliation: 3号棟3階3306
   github: https://github.com/k16kgw/Class_Josai_GameTheory
   bibliography:
     - references.bib
-  numbering:
-    heading_1: false
-    heading_2: true
-    heading_3: true
-    heading_4: true
-    heading_5: true
-    heading_6: true
   exports:
     - format: pdf
       template: plain_latex_book
       output: exports/book.pdf
+  numbering:
+    # title: true
+    headings: true
+    # あるいは必要なレベルだけ
+    # heading_1: false
+    # heading_2: true
+    # heading_3: true
+    # heading_4: true
+    # heading_5: true
+    # heading_6: true
   toc:
     - file: intro.md
     - file: contents/1_guidance.md
