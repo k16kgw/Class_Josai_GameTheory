@@ -24,9 +24,9 @@ project:
     # heading_3: true
   toc:
     - file: intro.md
-    - file: contents/1_introduction.md
-    - file: contents/2_normal_form.md
-    - file: contents/3_nash_equilibrium.md
+    - file: contents/1_guidance.md
+    - file: contents/2_expected_utility.md
+    - file: contents/3_strategic_form_game.md
     # - file: contents/4_mixed_strategy.md
     # - file: contents/5_extensive_form.md
     # - file: contents/6_repeated_games.md
