@@ -26,8 +26,8 @@ project:
   toc:
     - file: intro.md
     - file: contents/1_guidance.md
-    - file: contents/2_expected_utility.md
-    - file: contents/3_strategic_form_game.md
+    # - file: contents/2_expected_utility.md
+    # - file: contents/3_strategic_form_game.md
     # - file: contents/4_Nash_equilibrium.md
     # - file: contents/5_mixed_strategy.md
     # - file: contents/6_prisoners_dilemma.md
