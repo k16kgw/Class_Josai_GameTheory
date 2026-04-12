@@ -3,9 +3,17 @@ project:
   title: ゲーム理論
   authors:
     - name: Keiichiro Kagawa
+      email: kkagawa@josai.ac.jp
   github: https://github.com/k16kgw/Class_Josai_GameTheory
   bibliography:
     - references.bib
+  numbering:
+    heading_1: false
+    heading_2: true
+    heading_3: true
+    heading_4: true
+    heading_5: true
+    heading_6: true
   exports:
     - format: pdf
       template: plain_latex_book
