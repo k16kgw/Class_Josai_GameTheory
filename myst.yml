@@ -1,43 +1,33 @@
-# See docs at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  id: 3f7a1b2c-8e4d-4f9a-b6c5-1d2e3f4a5b6c
   title: ゲーム理論
-  description: 城西大学理学部情報数理学科対象科目
   authors:
     - name: Keiichiro Kagawa
-    - email: kkagawa@josai.ac.jp
-    # - affiliation: 3号棟3階3306
   github: https://github.com/k16kgw/Class_Josai_GameTheory
-  # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
   bibliography:
     - references.bib
   exports:
     - format: pdf
       template: plain_latex_book
       output: exports/book.pdf
-  numbering:
-    # title: true
-    headings: true
-    # あるいは必要なレベルだけ
-    # heading_2: true
-    # heading_3: true
   toc:
     - file: intro.md
     - file: contents/1_guidance.md
     - file: contents/2_expected_utility.md
     - file: contents/3_strategic_form_game.md
-    # - file: contents/4_mixed_strategy.md
-    # - file: contents/5_extensive_form.md
-    # - file: contents/6_repeated_games.md
-    # - file: contents/7_cooperative_games.md
-    # - file: contents/8_mechanism_design.md
-    # - file: contents/9_auction.md
-    # - file: contents/10_application.md
+    # - file: contents/4_Nash_equilibrium.md
+    # - file: contents/5_mixed_strategy.md
+    # - file: contents/6_prisoners_dilemma.md
+    # - file: contents/7_mid_test.md
+    # - file: contents/8_extensive_form_game.md
+    # - file: contents/9_repeated_game.md
+    # - file: contents/10_incomplete_information.md
+    # - file: contents/11_barganing_game.md
+    # - file: contents/12_core.md
+    # - file: contents/13_evolutionary_game.md
 
 site:
   options:
-    # logo: logo.png
     folders: true
   template: book-theme
-  # template: article-theme
+

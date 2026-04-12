@@ -1,4 +1,7 @@
 # ゲーム理論（城西大学）
+<!-- 
+https://github.com/k16kgw/Class_Josai_GameTheory
+ -->
 
 ## 講義情報
 
