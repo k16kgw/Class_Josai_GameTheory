@@ -1,213 +1,490 @@
-# 第2回　期待効用理論
+# 第2回：期待効用理論
 
-<!-- ## 講義概要 -->
+### 前回の復習
 
-### 復習
+- ゲーム理論は，複数のプレイヤーが互いの行動に影響を与え合う状況を分析する理論である．
+- ゲームは主に **プレイヤー・戦略・利得** によって記述される．
+- 各プレイヤーは，自分にとって望ましい結果を実現しようとして行動すると考える．
+
+今回の講義では，この「望ましい結果」をどのように数値で表すかを考える．
+特に，不確実性がある状況での意思決定を扱うために，**期待効用理論**を学ぶ．
 
 ### 到達目標
 
-- 期待効用理論を理解し，期待効用を計算できる．
+- 不確実性の下での意思決定を，くじ・選好・効用関数を用いて表現できる．
+- 期待効用を計算し，複数の選択肢を比較できる．
+- 期待値最大化と期待効用最大化の違いを説明できる．
+- リスク回避・リスク中立・リスク愛好を，効用関数の形と結びつけて理解できる．
+- 期待効用理論が，混合戦略や情報不完備ゲームの基礎になることを理解できる．
 
 ### キーワード
 
-- 意思決定
 - 選好
-- 効用，期待効用理論
-- リスク回避型・リスク中立型・リスク愛好型
-- ベイジアン仮説
-
-## 意思決定のモデル
-
-選択対象の集合：$X$
-
-## 不確実性の下での意思決定
-
-ゲーム理論では，他者の行動だけでなく，確率的な結果が関わる場面が多い．
-
-例として次を挙げる．
-
-- 相手のタイプが確率的にしか分からない（情報不完備ゲーム）
-- ランダム化した戦略を用いる（混合戦略）
-- 環境の状態が確率的に変動する（経済状態，通信品質など）
-
-これらを扱うために，まず不確実性の下での合理的意思決定の基礎として**期待効用理論**を学ぶ．
+- 効用関数
+- 期待効用
+- フォン・ノイマン=モルゲンシュテルン効用
+- リスク回避・リスク中立・リスク愛好
 
 ---
 
-## 2．基本概念：結果，くじ，選好
+## 期待効用理論
 
-### 結果（outcome）
+ゲーム理論では，プレイヤーが戦略を選んだ結果として利得を得る．
+しかし，現実の意思決定では結果が確実に決まるとは限らない．
 
-結果の集合を $X$ とする．要素 $x\in X$ は「金銭額」「評価」「状態」などを表す．
+例
 
-### くじ（lottery）
+- 企業が新製品を投入するが，成功するか失敗するかは確率的である．
+- 入札者は他の入札者の評価額を知らないままオークションで入札する．
+- サッカーのペナルティキック（PK）ではキッカーがどこにシュートを放つかを確率的に決めている．
+- 相手が「協力的なタイプ」か「攻撃的なタイプ」かを完全には知らない．
 
-有限個の結果に対して確率が割り当てられたものをくじと呼ぶ．
+このような状況では，単に結果の金額や点数を見るだけではなく**確率を含む選択肢全体**を比較する必要がある．
+期待効用理論は，この比較を数理的に扱うための基礎である．
 
-結果 $x_1,\dots,x_m$ と確率 $p_1,\dots,p_m$（$\sum_k p_k=1$）によるくじを
+```{tip} 注意
+ゲーム理論の多くのモデルではプレイヤーは自分の期待効用を最大化するように行動すると仮定する．
+この仮定のおかげで混合戦略，ナッシュ均衡，ベイジアンゲームなど，数理的に扱いやすくなる．
+```
+
+### 確実な結果の選好
+
+不確実性がない場合を考える．
+
+プレイヤーが選択する対象を**選択対象**と呼び，選択対象の集合を $X$ とする．
+
+2つの選択対象のうち，プレイヤーがどちらを選択しがちかという好みを，**選好関係** $\succsim$ で表す．
+
+```{tip} 定義：選好関係
+2つの選択対象 $x, y \in X$ に対して，$x$ が $y$ よりも好ましいことを $x\succ y$（えっくす・さっく・わい）と表す．
+
+$x$ と $y$ が同程度に好きであるとき，$x$ と $y$ に関して**無差別**であるといい，$x\sim y$ と表す．
+
+$x\succ y$ または $x\sim y$ であるとき，まとめて $x\succsim y$ と表す．この $\succsim$ を<span style="color:red">選好関係</span>と呼ぶ．
+```
+
+これ以降，選好関係は次の2つの仮定を満たすものとする．
+
+- **完備性**：任意の選択対象 $x, y \in X$ に対して $x \succsim y$ または $y \succsim x$ が成り立つ．
+- **推移性**：任意の選択対象 $x, y, z \in X$ に対して $x \succsim y$ かつ $y \succsim z$ が成り立つならば $x \succsim z$が成り立つ．
+
+※ 推移性は選好に循環的な矛盾がないことを意味する．
+例えば，$L$ は $M$ 以上に好ましく，$M$ は $N$ 以上に好ましいのに，$N$ を $L$ より好む，というような判断を排除する．
+
+**推移性**を満たす選好関係を<span style="color:red">選好順序</span>と呼ぶ．
+
+| 性質 | 前順序 | 半順序 | 全順序 | 選好順序 |
+| --- | :-: | :-: | :-: | :-: |
+| 反射律 | ⚪︎ | ⚪︎ | ⚪︎ | ⚪︎ |
+| 推移律 | ⚪︎ | ⚪︎ | ⚪︎ | ⚪︎ |
+| 反対称律 | × | ⚪︎ | ⚪︎ | × |
+| 完全律（完備性） | × | × | ⚪︎ | ⚪︎ |
+
+例：単純に金額をもらうだけの話であれば，
 
 $$
-L = (p_1,x_1;\; p_2,x_2;\; \dots;\; p_m,x_m)
+\text{1000円を得る} \succeq \text{500円を得る} \succeq \text{0円を得る}
 $$
 
-と表す．
+と考えられる．
 
-### 選好（preference）
+### 不確実性の下での意思決定
 
-意思決定主体の選好関係を $\succeq$ と表す．
+不確実性がある場合，戦略に付随する結果は単一ではなく，複数の結果が確率的に生じるものになる．
+これを**くじ**と呼ぶ．
 
-$L \succeq M$ は「くじ $L$ を $M$ 以上に好む」ことを意味する．
+```{tip} 定義：くじ
+結果 $x_1,\ldots,x_m$ がそれぞれ確率 $p_1,\ldots,p_m$ で生じる選択対象を<span style="color:red">くじ</span>という．
+ただし，
+
+$$
+p_k\ge 0,\qquad \sum_{k=1}^m p_k=1
+$$
+
+である．
+くじ$L$を次のように表す．
+
+$$
+L=(p_1,x_1;\ p_2,x_2;\ \dots;\ p_m,x_m)
+$$
+```
+
+くじ $L$ を
+
+$$
+L=(0.5,100;\ 0.5,0)
+$$
+
+とする．
+これを「確率$0.5$で$100$万円を得て，確率$0.5$で$0$万円を得る」選択対象とする．
+また，確実に$40$万円を得る選択対象を
+
+$$
+C=(1,40)
+$$
+
+とおく．
+
+このとき，二つの選択対象$L$と$C$のどちらを選ぶかを考える．
+金額の期待値を比較すると，
+
+$$
+E[L]=0.5\cdot 100+0.5\cdot 0=50,\qquad E[C]=40
+$$
+
+となるため，$L$の方が大きい．
+しかし，どちらの選択対象を選ぶ戦略を取るかは人によって異なる．
+これは，人々が金額の期待値だけでなく，結果に対する**効用**を考えているためである．
 
 ---
 
-## 3．期待効用仮説
+## 期待効用
 
-直観的には，意思決定主体がくじを評価するとき
-
-- 各結果 $x$ に対し効用 $u(x)$ を与え，
-- 確率で重み付けして平均を取る
-
-という形で比較するという仮説である．
+```{tip} 定義：効用関数
+集合$X$を取り得る選択対象全ての集合とする．
+このとき，<span style="color:red">効用関数</span> $u:X\to\mathbb{R}$ は次を満たす関数と定める．
 
 $$
-EU(L)=\sum_{k=1}^m p_k\,u(x_k)
+x\succeq y \iff u(x)\geq u(y)
 $$
 
-この形で比較できるとき，選好は期待効用で表現されるという．
+また，実数 $u(x)$ を選択対象 $x$ に対する<span style="color:red">効用</span>と呼ぶ．
+```
 
----
+ここでは，効用の数値そのものではなく**大小関係が本質**である．
 
-## 4．期待効用定理（表現定理）の主張
-
-期待効用理論の核心は，次の主張である．
-
-> くじに対する選好 $\succeq$ が一定の合理性公理を満たすならば，ある効用関数 $u$ が存在して，すべてのくじを期待効用で順位づけできる．
-> 
-
-すなわち，公理 $\Rightarrow$ 表現（期待値の形）である．
-
-本講義では証明の詳細には深入りせず，公理の意味と使い方に重点を置く．
-
----
-
-## 5．公理（合理性条件）の内容
-
-教科書に沿って，重要な公理を整理する．
-
-### 完備性（completeness）
-
-任意の2つのくじ $L,M$ について，$L\succeq M$ または $M\succeq L$ が成り立つ．
-
-比較不能がないという仮定である．
-
-### 推移性（transitivity）
-
-$L\succeq M$ かつ $M\succeq N$ なら $L\succeq N$．
-
-選好が矛盾しないという条件である．
-
-### 連続性（continuity）
-
-極端に飛びがある選好を排除し，「少し混ぜれば同程度になる」状況を保証する．
-
-直観としては，最良と最悪のくじを適当に混合することで中間のくじと無差別になるような混合比が存在する，という性質である．
-
-### 独立性（independence）
-
-くじ $L,M,N$ と $0<\alpha<1$ に対し
+```{tip} 定義：期待効用
+不確実性のない選択対象 $x_k$ ($k=1,\ldots,m$) に対して効用 $u(x_k)$ が与えられているとする．
+くじ $L=(p_1,x_1;\dots;p_m,x_m)$ の効用（<span style="color:red">期待効用</span>） $u(L)$ は，次で定義される．
 
 $$
-L\succeq M \iff \alpha L + (1-\alpha)N \succeq \alpha M + (1-\alpha)N
+u(L)=\sum_{k=1}^m p_k u(x_k).
+$$
+```
+
+```{tip} 定義：期待効用仮説
+任意の不確実でない選択対象 $x$ に対して効用 $u(x)$ が対応しているとする．
+このとき，不確実性を含む選択対象の選好順序が期待効用の順序に従うものとする．
+すなわち
+
+$$
+L\succsim M \iff u(L)\geq u(M)
 $$
 
+によって選択が決まるものとする．
+```
+
+期待効用仮説は，合理的なプレイヤーを考える上で必要な仮説である．
+これ以降，期待効用仮説を仮定する．
+
+### 期待値と期待効用の違い
+
+金銭額そのものを $x$ とすると，期待値は
+
+$$
+E[L]=\sum_{k=1}^m p_k x_k
+$$
+
+である．
+一方，期待効用は
+
+$$
+u(L)=\sum_{k=1}^m p_k u(x_k)
+$$
+
+である．
+
+期待値は「結果を平均する」計算であり，期待効用は「結果の効用を平均する」計算である．
+効用関数が線形でない場合，この2つは同じ判断を導くとは限らない．
+
+```{note} 演習1
+効用関数を
+
+$$
+u(x)=x^2\qquad (x\ge 0)
+$$
+
+とする．
+このとき，くじ $L=(0.5,100;\ 0.5,0)$ と $C=(1,40)$ の期待効用を計算し，どちらを選択するかを答えよ．
+
+<!-- 
+$$
+u(L)=0.5 \times 100^2 + 0.5 \times 0^2 = 5000
+$$
+
+$$
+u(C)= 40^2 = 1600
+$$
+
+である．
+したがって，この効用関数を持つプレイヤーは $L$ を選ぶ．
+ -->
+```
+
+```{warning} 課題1
+効用関数を
+
+$$
+u(x)=\sqrt{x}\qquad (x\ge 0)
+$$
+
+とする．
+このとき，くじ $L=(0.5,100;\ 0.5,0)$ と $C=(1,40)$ の期待効用を計算し，どちらを選択するかを答えよ．
+
+<!-- 
+$$
+u(L)=0.5\sqrt{100}+0.5\sqrt{0}=5
+$$
+
+$$
+u(C)=\sqrt{40}\simeq 6.32
+$$
+
+である．
+したがって，この効用関数を持つプレイヤーは，期待値が小さいにもかかわらず，確実な $C$ を選ぶ．
+ -->
+```
+
+### 期待効用定理
+
+期待効用理論の中心にあるのは，von NeumannとMorgensternによる表現定理である．
+
+期待効用仮説が成り立つために必要な，選好順序に対する仮定を考える．
+
+- **独立性**：任意の選択対象 $x,y,z$ と任意の実数 $\alpha\in(0,1)$ について，
+$$
+x\succsim y
+\iff
+\alpha x+(1-\alpha)z \succsim \alpha y+(1-\alpha)z
+$$
 が成り立つ．
+これは共通の部分 $z$ を同じ確率で混ぜても，$x$ と $y$ の比較は変わらないという条件である．
+独立性は期待効用の線形な形を導くうえで特に重要である．
+- **連続性**：選択対象$x,y,z$ が $x\succ y\succ z$ を満たすとき，次を満たす実数 $\alpha\in(0,1)$ が存在する：
+$$
+y\sim \alpha x+(1-\alpha)z.
+$$
+直観的には，中間的な選択対象 $y$ は，良い選択対象 $x$ と悪い選択対象 $z$ を適切な確率で混ぜたものと無差別になるという条件である．
 
-ここで $\alpha L+(1-\alpha)N$ は「確率 $\alpha$ で $L$，確率 $1-\alpha$ で $N$ を行うくじ」を意味する．
+```{tip} 定理：期待効用定理
+選択対象の集合 $X$ とその上の選好関係 $\succsim$ に対して，推移性・完備性・独立性・連続性を満たすための必要十分条件は，次を満たす効用関数 $u$ が存在することである：
 
-独立性は期待値形式を導く決定的条件であり，期待効用理論の最も特徴的な公理である．
+任意の選択対象 $x,y \in X$ に対して
+$$
+x \succsim y \iff u(x) \geq u(y)
+$$
+が成り立つ．  
+さらに，任意の $\alpha \in (0,1)$ に対して
+$$
+u(\alpha x + (1-\alpha)y) = \alpha u(x) + (1-\alpha)u(y)
+$$
+が成り立つ．
+```
 
----
+このときの効用関数を特に，選好順序 $\succsim$ に関する<span style="color:red">von Neumann–Morgenstern効用関数</span>と呼ぶ．
 
-## 6．効用の一意性（アフィン変換）
+<!-- 
+```{tip}
+独立性は強い仮定であり，現実の人間の選択では破れることがある．
+有名な例にアレのパラドックスがある．
+それでも，ゲーム理論では合理的プレイヤーの標準的なモデルとして期待効用最大化を用いることが多い．
+```
+ -->
 
-期待効用を表す効用関数 $u$ は一般に一意ではない．
+### 効用関数の一意性
 
-しかし次の形の変換では同じ選好を表す．
+期待効用を表す効用関数は正のアフィン変換したものを除いて一意である．
+
+```{tip} 定理：効用関数の一意性
+効用関数 $u$ が選好を表しているとき，
 
 $$
-v(x)=a\,u(x)+b \quad (a>0)
+v(x)=a u(x)+b \qquad (a>0)
 $$
 
-このように，期待効用の効用関数は**正のアフィン変換まで一意**である．
+で定義される $v$ も同じ選好を表す．
+```
 
-これはゲーム理論で効用を扱う際の重要な注意点である．
+実際，
 
----
+$$
+v(L)
+=\sum_k p_k\{a u(x_k)+b\}
+=a\sum_k p_k u(x_k)+b\sum_k p_k
+=a u(L)+b
+$$
 
-## 7．危険回避と効用関数の形（応用的視点）
+である．
+$a>0$ なので，期待効用の大小関係は変わらない．
 
-金銭額 $m$ を結果とするとき，効用 $u(m)$ の曲率が態度を表す．
-
-- 危険回避（risk averse）：$u$ が凹（concave）
-- 危険中立（risk neutral）：$u$ が線形
-- 危険愛好（risk loving）：$u$ が凸（convex）
-
-この議論は，後のオークション，交渉，不完備情報ゲームにおいて頻出する．
-
----
-
-## 演習の目的
-
-- くじをデータ構造として表す
-- 期待効用を正しく計算できる
-- 効用関数の形（凹凸）が意思決定に与える影響を，計算で確認する
-- 次回以降（戦略形ゲーム，混合戦略，不完備情報）で再利用できる形式にする
+この性質は，ゲーム理論で利得を扱うときに重要である．
+利得の数値は，プレイヤーの選好を表すための尺度であり，単位や原点の取り方には自由度がある．
 
 ---
 
-## 演習0　くじの表現（提出用）
+## リスクに対する態度
 
-::: {admonition} 提出
-次の「くじ」を文章で定義し，確率と結果を整理して提出する．
-:::
+金額 $x$ に対する効用関数 $u(x)$ の形は，リスクに対する態度を表す．
 
-- くじ \(L\)：確率 \(\*\*\) で結果 \(\*\*\)，確率 \(\*\*\) で結果 \(\*\*\)
-- くじ \(M\)：確率 \(\*\*\) で結果 \(\*\*\)，確率 \(\*\*\) で結果 \(\*\*\)
-- あなたの直観ではどちらが好ましいか：
-- その理由：
+### リスク回避型
 
----
+効用関数が凹関数であるとき，プレイヤーは**リスク回避的**であるという．
 
-## 演習1　期待効用の計算（手計算）
+$$
+u''(x)<0
+$$
 
+直観的には，金額が増えるほど追加的な満足の増え方が小さくなる．
+例えば，
+
+$$
+u(x)=\sqrt{x},\qquad u(x)=\log x
+$$
+
+はリスク回避的な効用関数である．
+
+リスク回避的なプレイヤーでは，しばしば次が成り立つ．
+
+$$
+u(E[X]) > E[u(X)]
+$$
+
+つまり，確率的な収入よりも，同じ期待値を持つ確実な収入を好みやすい．
+
+### リスク中立型
+
+効用関数が線形であるとき，プレイヤーは**リスク中立的**であるという．
+
+$$
+u(x)=ax+b \qquad (a>0)
+$$
+
+この場合，期待効用最大化は期待値最大化と一致する．
+
+### リスク愛好型
+
+効用関数が凸関数であるとき，プレイヤーは**リスク愛好的**であるという．
+
+$$
+u''(x)>0
+$$
+
+この場合，同じ期待値であれば，確実な結果よりもばらつきのあるくじを好みやすい．
+
+```{note} 演習2
 次の効用関数を用いる．
 
 $$
-u(x)=\sqrt{x} \quad (x\ge 0)
+u(x)=x^2\qquad (x\ge 0)
 $$
 
-くじ $L=(0.5,\,100;\;0.5,\,0)$ と
+くじ $L=(0.5,100;\ 0.5,0)$ と $C=(1,40)$ について，次の問いに答えよ．
 
-確実な結果 $C=(1,\,40)$ を比較する．
+<!-- 
+1. $E[L]$ と $E[C]$ を計算せよ．
+2. $u(L)$ を計算せよ．
+3. $u(C)$ を計算せよ．
+4. このプレイヤーは $L$ と $C$ のどちらを選ぶか．
+ -->
+1. この効用関数は凹関数であるからリスク回避型である．このプレイヤーがリスク回避型であることと，$L$または$C$を選ぶこととが整合的である直観的理由を説明せよ．
+```
 
-1. $EU(L)$ を計算せよ．
-2. $EU(C)$ を計算せよ．
-3. この意思決定主体はどちらを選ぶか．
-4. なぜこの選択が「危険回避」と整合的か説明せよ．
+```{warning} 課題2
+次の効用関数を用いる．
+
+$$
+u(x)=\sqrt{x}\qquad (x\ge 0)
+$$
+
+くじ $L=(0.5,100;\ 0.5,0)$ と $C=(1,40)$ について，次の問いに答えよ．
+
+<!-- 
+1. $E[L]$ と $E[C]$ を計算せよ．
+2. $u(L)$ を計算せよ．
+3. $u(C)$ を計算せよ．
+4. このプレイヤーは $L$ と $C$ のどちらを選ぶか．
+ -->
+1. この効用関数は凹関数であるからリスク回避型である．このプレイヤーがリスク回避型であることと，$L$または$C$を選ぶこととが整合的である直観的理由を説明せよ．
+```
 
 ---
 
-## 演習2　Pythonで期待効用を計算する（提出用セル）
+## 確実性等価とリスクプレミアム
 
-以下のコードセルを実行し，演習1の計算結果と一致することを確認せよ．
+リスク回避をより定量的に見るために，**確実性等価**を定義する．
+
+```{tip} 定義：確実性等価
+くじ $L$ と無差別になる確実な金額 $c$ を，くじ $L$ の<span style="color:red">確実性等価</span>という．
+
+$$
+u(c)=u(L)
+$$
+```
+
+例えば，$u(x)=\sqrt{x}$，$L=(0.5,100;\ 0.5,0)$ のとき，
+
+$$
+u(L)=5
+$$
+
+である．
+確実性等価 $c$ は，
+
+$$
+\sqrt{c}=5
+$$
+
+を満たすので，
+
+$$
+c=25
+$$
+
+である．
+
+一方，$L$ の期待値は 50 である．
+したがって，この主体は「確実な 25」と「50 の期待値を持つくじ」を同じくらいに評価している．
+
+```{tip} 定義：リスクプレミアム
+くじの期待値と確実性等価の差
+
+$$
+E[L]-c
+$$
+
+を<span style="color:red">リスクプレミアム</span>という．
+```
+
+上の例では，リスクプレミアムは
+
+$$
+50-25=25
+$$
+
+である．
+これはリスクを避けるために最大 $25$ までなら支払っても良いと解釈される．
+
+---
+
+## PC演習
+
+### PC演習1：Pythonで期待効用を計算する
+
+次のコードを実行し，演習2の計算結果と一致することを確認せよ．
 
 ```python
 import math
 
+def expected_value(lottery):
+    """
+    lottery: list of (probability, outcome)
+    """
+    return sum(p * x for p, x in lottery)
+
 def expected_utility(lottery, u):
     """
-    lottery: list of (p, x)
-    u: utility function u(x)
+    lottery: list of (probability, outcome)
+    u: utility function
     """
     return sum(p * u(x) for p, x in lottery)
 
@@ -216,23 +493,25 @@ u = lambda x: math.sqrt(x)
 L = [(0.5, 100), (0.5, 0)]
 C = [(1.0, 40)]
 
+EV_L = expected_value(L)
+EV_C = expected_value(C)
 EU_L = expected_utility(L, u)
 EU_C = expected_utility(C, u)
 
-EU_L, EU_C
+print("E[L] =", EV_L)
+print("E[C] =", EV_C)
+print("u(L) =", EU_L)
+print("u(C) =", EU_C)
+print("choose", "L" if EU_L > EU_C else "C")
 ```
 
----
+### PC演習2：効用関数による選択の違い
 
-## 演習3　効用関数の違いによる選択の変化
+同じくじ $L=(0.5,100;\ 0.5,0)$ と $C=(1,40)$ を，次の3つの効用関数で比較せよ．
 
-同じくじ ($L$) と確実な結果 ($C$) に対して，次の3つの効用関数で比較せよ．
-
-- 危険回避：($u_1(x)=\sqrt{x}$)
-- 危険中立：($u_2(x)=x$)
-- 危険愛好：($u_3(x)=x^2$)
-
-### 提出用セル（Python）
+- リスク回避型：$u_1(x)=\sqrt{x}$
+- リスク中立型：$u_2(x)=x$
+- リスク愛好型：$u_3(x)=x^2$
 
 ```python
 u1 = lambda x: math.sqrt(x)
@@ -242,113 +521,107 @@ u3 = lambda x: x**2
 for name, ufun in [("sqrt(x)", u1), ("x", u2), ("x^2", u3)]:
     EU_L = expected_utility(L, ufun)
     EU_C = expected_utility(C, ufun)
-    print(name, "EU(L)=", EU_L, "EU(C)=", EU_C, "choose", "L" if EU_L > EU_C else "C")
+    if EU_L > EU_C:
+        choice = "L"
+    elif EU_L < EU_C:
+        choice = "C"
+    else:
+        choice = "indifferent"
+
+    print(name, "      \t", "u(L) =", EU_L, "u(C) =", EU_C, "choice =", choice)
 ```
 
-### 提出（Markdown）
+```{warning} 課題3
+3つの効用関数で選択がどのように変わったかを説明せよ．
+その際，効用関数の凹凸の形状と，リスク回避・リスク中立・リスク愛好とを結びつけること．
+```
+<!-- 
+### PC演習3：確実性等価を計算する
 
-- 3つの効用関数で選択がどう変わったか
-- その理由を凹凸（危険回避・中立・愛好）と結びつけて説明せよ
+$u(x)=\sqrt{x}$ とする．
+くじ
 
----
+$$
+L=(0.5,100;\ 0.5,0)
+$$
 
-## 演習4　くじをJSONとして保存する（次回以降に再利用）
+について，次の問いに答えよ．
 
-第10回（情報不完備ゲーム）などでは「タイプの確率」や「状態の確率」が重要になる．そこで，くじをデータとして保存し再利用する．
-
-### 提出用セル（Python）
+1. $u(L)$ を計算せよ．
+2. 確実性等価 $c$ を求めよ．
+3. リスクプレミアムを求めよ．
+4. リスクプレミアムの意味を説明せよ．
 
 ```python
-import json
+EU_L = expected_utility(L, u)
+certainty_equivalent = EU_L**2
+risk_premium = expected_value(L) - certainty_equivalent
 
-lotteries = {
-    "L": {"description": "0.5 for 100, 0.5 for 0", "lottery": L},
-    "C": {"description": "certain 40", "lottery": C},
-}
-
-with open("lecture2_lotteries.json", "w", encoding="utf-8") as f:
-    json.dump(lotteries, f, ensure_ascii=False, indent=2)
-
-print("Saved:", "lecture2_lotteries.json")
+print("u(L) =", EU_L)
+print("certainty equivalent =", certainty_equivalent)
+print("risk premium =", risk_premium)
 ```
-
+ -->
 ---
 
-## 演習5（次回以降への接続）混合戦略との対応
+## 発展演習：自分のリスク態度を推定する
 
-混合戦略は「戦略に確率を割り当てたもの」である．
+本節のコードは，いくつかのくじの選択問題に対する回答から，リスク回避度のパラメータを簡易的に推定する例である．
+時間に余裕がある場合に実行してみると良い．
 
-期待効用の計算は，混合戦略の利得計算と同じ構造を持つ．
+効用関数を次で定義し，いくつかのくじに対する選択の結果を元に効用関数のパラメタ $\gamma$ の値を推定する．
 
-### 確認問題（提出）
+$$
+u(x)= \begin{cases}\log x & (\gamma=1) \\ \frac{x^{1-\gamma}-1}{1-\gamma} & (\gamma \neq 1)\end{cases}
+$$	
 
-- くじの確率 ($p_k$) と，混合戦略の確率は何に対応するか
-- 結果 ($x_k$) と，ゲーム理論における「利得」は何に対応するか
-- 期待効用の式が，混合戦略の期待利得の計算にどう現れるか
+推定した $\gamma$ の値に応じて
 
----
+- $\gamma > 0.15$: リスク回避的
+- $\gamma < −0.15$: リスク愛好的
+- それ以外: リスク中立に近い
 
-# 演習（自分の効用関数を推定する）
+と評価する．
 
-```bash
+```python
 import math
 import random
-import numpy as np
-import pandas as pd
-
-# 推定で scipy を使う
-from scipy.optimize import minimize_scalar
-
-# =========================
-# 1. 効用関数と期待効用
-# =========================
 
 def crra_utility(x, gamma):
     """
-    CRRA効用関数
-    x > 0 を想定
-    gamma = 1 のときは log x
+    CRRA utility.
+    gamma > 0: risk averse
+    gamma = 0: risk neutral
+    gamma < 0: risk loving
     """
-    x = max(x, 1e-8)  # log(0)回避
+    x = max(x, 1e-8)
     if abs(gamma - 1.0) < 1e-8:
         return math.log(x)
     return (x ** (1.0 - gamma) - 1.0) / (1.0 - gamma)
 
-def expected_utility(lottery, gamma):
-    """
-    lottery: [(p1, x1), (p2, x2), ...]
-    """
+def expected_utility_crra(lottery, gamma):
     return sum(p * crra_utility(x, gamma) for p, x in lottery)
 
-# =========================
-# 2. 実験問題の生成
-# =========================
-
 def generate_lottery():
-    """
-    2点分布のくじを1つ生成する
-    """
-    p = random.choice([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
-    x_high = random.choice([20, 30, 40, 50, 60, 80, 100, 120, 150])
-    x_low = random.choice([0, 5, 10, 15, 20, 30, 40])
+    p = random.choice([0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8])
+    x_high = random.choice([40, 60, 80, 100, 120, 150])
+    x_low = random.choice([0, 5, 10, 20, 30])
 
-    # high > low になるように補正
     if x_high <= x_low:
-        x_high = x_low + random.choice([10, 20, 30, 40])
+        x_high = x_low + 20
 
     return [(p, x_high), (1 - p, x_low)]
 
 def lottery_to_text(lottery):
     return " + ".join([f"{p:.1f}で{x}" for p, x in lottery])
 
-def generate_question_set(n_questions=12, seed=42):
+def generate_question_set(n_questions=8, seed=42):
     random.seed(seed)
     questions = []
 
     for i in range(n_questions):
         A = generate_lottery()
         B = generate_lottery()
-
         questions.append({
             "id": i + 1,
             "A": A,
@@ -359,76 +632,45 @@ def generate_question_set(n_questions=12, seed=42):
 
     return questions
 
-# =========================
-# 3. 問題を表示
-# =========================
-
 def show_questions(questions):
-    rows = []
     for q in questions:
-        rows.append({
-            "問題番号": q["id"],
-            "選択肢A": q["A_text"],
-            "選択肢B": q["B_text"],
-        })
-    return pd.DataFrame(rows)
-
-# =========================
-# 4. 回答を入力
-# =========================
-
-def collect_answers_interactive(questions):
-    """
-    Notebook上で対話的に回答を集める
-    A または B を入力
-    """
-    answers = []
-
-    print("各問題について A または B を入力してください．\n")
-    for q in questions:
-        print(f"問題 {q['id']}")
+        print(f"問題 {q['id']}:")
         print(f"  A: {q['A_text']}")
         print(f"  B: {q['B_text']}")
+
+def collect_answers_interactive(questions):
+    answers = []
+    print("各問題について A または B を入力してください．")
+
+    for q in questions:
+        print(f"\n問題 {q['id']}")
+        print(f"  A: {q['A_text']}")
+        print(f"  B: {q['B_text']}")
+
         while True:
             ans = input("選択（A/B）: ").strip().upper()
             if ans in ["A", "B"]:
                 answers.append(ans)
                 break
             print("A または B を入力してください．")
-        print()
 
     return answers
 
-# =========================
-# 5. 確率的選択モデル
-# =========================
-
-def choice_prob_logit(EU_A, EU_B, beta=1.0):
-    """
-    ロジット型の選択確率
-    P(A) = exp(beta*EU_A) / (exp(beta*EU_A)+exp(beta*EU_B))
-    数値安定化のため差分で計算
-    """
+def choice_prob_A(EU_A, EU_B, beta=1.0):
     d = beta * (EU_A - EU_B)
-
-    # オーバーフロー回避
     if d >= 0:
         return 1.0 / (1.0 + math.exp(-d))
-    else:
-        ed = math.exp(d)
-        return ed / (1.0 + ed)
+    ed = math.exp(d)
+    return ed / (1.0 + ed)
 
 def negative_log_likelihood(gamma, questions, answers, beta=1.0):
-    """
-    与えられた gamma に対する負の対数尤度
-    """
     nll = 0.0
     eps = 1e-12
 
     for q, ans in zip(questions, answers):
-        EU_A = expected_utility(q["A"], gamma)
-        EU_B = expected_utility(q["B"], gamma)
-        pA = choice_prob_logit(EU_A, EU_B, beta=beta)
+        EU_A = expected_utility_crra(q["A"], gamma)
+        EU_B = expected_utility_crra(q["B"], gamma)
+        pA = choice_prob_A(EU_A, EU_B, beta=beta)
 
         if ans == "A":
             nll -= math.log(max(pA, eps))
@@ -437,91 +679,53 @@ def negative_log_likelihood(gamma, questions, answers, beta=1.0):
 
     return nll
 
-# =========================
-# 6. gamma を推定
-# =========================
+def estimate_gamma_grid(questions, answers, beta=1.0):
+    candidates = [round(-2.0 + 0.05 * i, 2) for i in range(101)]
+    best_gamma = None
+    best_score = float("inf")
 
-def estimate_gamma(questions, answers, beta=1.0, bounds=(-2.0, 3.0)):
-    """
-    負の対数尤度を最小化して gamma を推定
-    """
-    result = minimize_scalar(
-        lambda g: negative_log_likelihood(g, questions, answers, beta=beta),
-        bounds=bounds,
-        method="bounded"
-    )
-    return result
+    for gamma in candidates:
+        score = negative_log_likelihood(gamma, questions, answers, beta=beta)
+        if score < best_score:
+            best_gamma = gamma
+            best_score = score
 
-# =========================
-# 7. 結果表示
-# =========================
+    return best_gamma, best_score
 
 def interpret_gamma(gamma, tol=0.15):
     if gamma > tol:
-        return "危険回避的"
-    elif gamma < -tol:
-        return "危険愛好的"
-    else:
-        return "危険中立に近い"
+        return "リスク回避的"
+    if gamma < -tol:
+        return "リスク愛好的"
+    return "リスク中立に近い"
 
-def summarize_results(questions, answers, gamma_hat, beta=1.0):
-    rows = []
-    for q, ans in zip(questions, answers):
-        EU_A = expected_utility(q["A"], gamma_hat)
-        EU_B = expected_utility(q["B"], gamma_hat)
-        pred = "A" if EU_A >= EU_B else "B"
+questions = generate_question_set(n_questions=8, seed=42)
+show_questions(questions)
 
-        rows.append({
-            "問題番号": q["id"],
-            "A": q["A_text"],
-            "B": q["B_text"],
-            "回答": ans,
-            "推定モデルの予測": pred,
-            "EU(A)": round(EU_A, 4),
-            "EU(B)": round(EU_B, 4),
-            "一致": ans == pred
-        })
-
-    df = pd.DataFrame(rows)
-    accuracy = df["一致"].mean()
-
-    print("推定された gamma =", round(gamma_hat, 4))
-    print("解釈：", interpret_gamma(gamma_hat))
-    print("予測一致率 =", round(accuracy, 3))
-    print()
-
-    return df
-
-# =========================
-# 8. 一連の実行
-# =========================
-
-questions = generate_question_set(n_questions=12, seed=42)
-
-print("=== 実験問題一覧 ===")
-display(show_questions(questions))
-
-# 対話入力で回答収集
 answers = collect_answers_interactive(questions)
+gamma_hat, score = estimate_gamma_grid(questions, answers)
 
-# 推定
-result = estimate_gamma(questions, answers, beta=1.0, bounds=(-2.0, 3.0))
-gamma_hat = result.x
-
-print("=== 推定結果 ===")
-df_result = summarize_results(questions, answers, gamma_hat, beta=1.0)
-display(df_result)
+print("推定された gamma =", gamma_hat)
+print("解釈：", interpret_gamma(gamma_hat))
+print("負の対数尤度 =", round(score, 4))
 ```
 
-# 本日のまとめ
-
-- 不確実性の下での選好は，合理性公理のもとで期待効用で表現できる．
-- 効用関数は正のアフィン変換まで一意である．
-- 効用関数の凹凸は危険回避・中立・愛好の態度に対応する．
-- 期待効用計算は，混合戦略や不完備情報ゲームの基礎となる．
+この推定は簡略化された例であり，厳密な心理測定ではない．
+ここでの目的は，効用関数の形をデータから考える発想をつかむことである．
 
 ---
 
-## 次回予告
+## まとめ
 
-第3回は戦略形ゲームである．プレイヤー・戦略・利得関数（利得行列）により相互作用を定式化し，後の均衡概念（第4回）につなげる．
+- 不確実性のある選択肢は，くじとして表現される．
+- くじの評価は期待効用によって理解される．
+- 推移性・完備性・独立性・連続性を満たす選好は，期待効用仮説を満たす．
+- 効用関数は正のアフィン変換による同一視の下で一意である．
+- 効用関数の凹凸は，リスク回避・リスク中立・リスク愛好を表す．
+
+<!-- 
+## 次回
+
+第3回は戦略形ゲームを扱う．
+プレイヤー・戦略・利得関数を用いてゲームを定式化し，その後のナッシュ均衡の分析につなげる．
+ -->
