@@ -32,7 +32,7 @@ project:
     - file: contents/5_mixed_strategy.md
     - file: contents/6_prisoners_dilemma.md
     # - file: contents/7_mid_test.md
-    - file: contents/8_extensive_form_game.md
+    # - file: contents/8_extensive_form_game.md
     # - file: contents/9_repeated_game.md
     # - file: contents/10_incomplete_information.md
     # - file: contents/11_barganing_game.md
