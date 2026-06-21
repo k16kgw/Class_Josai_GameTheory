@@ -75,8 +75,8 @@ DP2○，DP3◎
 
 【準備学習】教科書第1章を読んでくる
 
-**■2回目**
-<!-- **[■2回目](/contents/2_expected_utility)** -->
+<!-- **■2回目** -->
+**[■2回目](/contents/2_expected_utility)**
 
 【テーマ】期待効用理論
 
@@ -84,8 +84,8 @@ DP2○，DP3◎
 
 【準備学習】教科書第2章を読んでくる
 
-**■3回目**
-<!-- **[■3回目](/contents/3_strategic_form_game)** -->
+<!-- **■3回目** -->
+**[■3回目](/contents/3_strategic_form_game)**
 
 【テーマ】戦略形ゲーム
 
@@ -93,8 +93,8 @@ DP2○，DP3◎
 
 【準備学習】教科書第3章を読んでくる
 
-**■4回目**
-<!-- **[■4回目](/contents/4_Nash_equilibrium)** -->
+<!-- **■4回目** -->
+**[■4回目](/contents/4_Nash_equilibrium)**
 
 【テーマ】ナッシュ均衡
 
@@ -102,8 +102,8 @@ DP2○，DP3◎
 
 【準備学習】教科書第4章を読んでくる
 
-**■5回目**
-<!-- **[■5回目](/contents/5_mixed_strategy)** -->
+<!-- **■5回目** -->
+**[■5回目](/contents/5_mixed_strategy)**
 
 【テーマ】混合戦略
 
@@ -111,8 +111,8 @@ DP2○，DP3◎
 
 【準備学習】教科書第4章を読んでくる
 
-**■6回目**
-<!-- **[■6回目](/contents/6_prisoners_dilemma)** -->
+<!-- **■6回目** -->
+**[■6回目](/contents/6_prisoners_dilemma)**
 
 【テーマ】囚人のジレンマ
 
@@ -129,8 +129,8 @@ DP2○，DP3◎
 
 【準備学習】6回目までの授業の復習をする
 
-**■8回目**
-<!-- **[■8回目](/contents/8_extensive_form_game)** -->
+<!-- **■8回目** -->
+**[■8回目](/contents/8_extensive_form_game)**
 
 【テーマ】展開形ゲーム
 
@@ -138,8 +138,8 @@ DP2○，DP3◎
 
 【準備学習】教科書第6章を読んでくる
 
-**■9回目**
-<!-- **[■9回目](/contents/9_repeated_game)** -->
+<!-- **■9回目** -->
+**[■9回目](/contents/9_repeated_game)**
 
 【テーマ】繰り返しゲーム
 
@@ -147,8 +147,8 @@ DP2○，DP3◎
 
 【準備学習】教科書第7章を読んでくる
 
-**■10回目**
-<!-- **[■10回目](/contents/10_incomplete_information)** -->
+<!-- **■10回目** -->
+**[■10回目](/contents/10_incomplete_information)**
 
 【テーマ】情報不完備ゲーム
 
