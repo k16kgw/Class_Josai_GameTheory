@@ -6,7 +6,12 @@ project:
     - name: Keiichiro Kagawa
     - email: kkagawa@josai.ac.jp
     # - affiliation: 3号棟3階3306
-  github: https://github.com/k16kgw/Class_Josai_GameTheory
+  # 公開ページからGitHub・編集・ソース表示へのリンクを出さない
+  # github: https://github.com/k16kgw/Class_Josai_GameTheory
+  edit_url: null
+  source_url: null
+  # 既定のMarkdownソースのダウンロードを無効にする
+  downloads: []
   bibliography:
     - references.bib
   exports:
@@ -42,4 +47,5 @@ project:
 site:
   options:
     folders: true
+    style: styles/site.css
   template: book-theme
