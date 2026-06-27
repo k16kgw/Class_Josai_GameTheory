@@ -40,7 +40,7 @@ project:
     - file: contents/8_extensive_form_game.md
     - file: contents/9_repeated_game.md
     - file: contents/10_incomplete_information.md
-    - file: contents/11_barganing_game.md
+    # - file: contents/11_barganing_game.md
     # - file: contents/12_core.md
     # - file: contents/13_evolutionary_game.md
 
