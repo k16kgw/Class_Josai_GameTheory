@@ -88,7 +88,7 @@
 4. 1種の商品を売る2つの企業が商品の価格を決定するにあたり，企業Aは企業Bの限界費用を知らず，さらに企業Bが前の期に行った設備投資を知らない．
 ```
 
-```{dropdown} <span style="color:red">解答例</span>
+```{dropdown} <span style="color:red">演習1 解答例</span>
 **1．ババ抜き**
 
 カードの種類，カードを引く順序，勝敗の決まり方などのゲームのルールは全員が知っている．
@@ -228,7 +228,7 @@ $$
 2. 「低費用なら参入し，高費用なら参入しない」という戦略を表せ．
 ```
 
-```{dropdown} <span style="color:red">解答例</span>
+```{dropdown} <span style="color:red">演習2 解答例</span>
 **1．純戦略**
 
 タイプのそれぞれに対して2つの行動を指定するため，純戦略は
@@ -327,7 +327,7 @@ $$
 を求めよ．
 ```
 
-```{dropdown} <span style="color:red">解答例</span>
+```{dropdown} <span style="color:red">演習3 解答例</span>
 資格を取得している確率は
 
 $$
@@ -507,7 +507,7 @@ $$
 3. $q$ が変化したとき，プレイヤー2の均衡行動がどのように変化するか説明せよ．
 ```
 
-```{dropdown} <span style="color:red">解答例</span>
+```{dropdown} <span style="color:red">課題1 解答例</span>
 **1．プレイヤー2の期待利得**
 
 プレイヤー1が $U$ を選ぶ確率はタイプ $H$ の確率に等しいので，
@@ -886,7 +886,7 @@ $$
 5. この戦略と信念の組が完全ベイジアン均衡である理由を説明せよ．
 ```
 
-```{dropdown} <span style="color:red">解答例</span>
+```{dropdown} <span style="color:red">演習4 解答例</span>
 **1．女性の分離戦略**
 
 $$
