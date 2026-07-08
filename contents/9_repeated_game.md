@@ -165,7 +165,7 @@
 将来利得をどの程度重視するかを表すために**割引因子**を用いる．
 
 ```{tip} 定義（割引因子）
-$0\leq\delta<1$ とし，今の意思決定点の利得をそのまま，1回後の利得を $\delta$ 倍，2回後の利得を $\delta^2$ 倍して評価することとする．
+$0 \leq \delta<1$ とし，今の意思決定点の利得をそのまま，1回後の利得を $\delta$ 倍，2回後の利得を $\delta^2$ 倍して評価することとする．
 このときの $\delta$ を<span style="color:red">割引因子</span>といい，最終的に得られる利得の総和を<span style="color:red">割引利得和</span>とよぶ．
 ```
 
@@ -353,20 +353,20 @@ $$
 これを解くと，
 
 $$
-r\geqt(1-\delta)+\delta p
+r \geq t(1-\delta)+\delta p
 $$
 
 である．
 したがって，
 
 $$
-\delta(t-p)\geqt-r
+\delta(t-p) \geq t-r
 $$
 
 より，
 
 $$
-\delta\geq\frac{t-r}{t-p}
+\delta \geq \frac{t-r}{t-p}
 $$
 
 である．
@@ -433,20 +433,20 @@ $$
 これを整理すると，
 
 $$
-4\geq6(1-\delta)+2\delta
+4 \geq 6(1-\delta)+2\delta
 $$
 
 すなわち，
 
 $$
-4\geq6-4\delta
+4 \geq 6-4\delta
 $$
 
 である．
 したがって，
 
 $$
-\delta\geq\frac{1}{2}
+\delta \geq \frac{1}{2}
 $$
 
 である．
@@ -492,16 +492,14 @@ $$
 しっぺ返し戦略で協力が維持されるためには，
 
 $$
-\frac{5}{1-\delta}
-\geq
-\frac{7}{1-\delta^2}
+\frac{5}{1-\delt} \geq \frac{7}{1-\delta^2}
 $$
 
 が成り立てばよい．
 したがって
 
 $$
-\delta\geq \frac{2}{5}
+\delta \geq \frac{2}{5}
 $$
 
 が得られる．
@@ -575,14 +573,14 @@ $$
 これを整理すると，
 
 $$
-r(1+\delta)\geqt+\delta s
+r(1+\delta) \geq t+\delta s
 $$
 
 である．
 したがって，
 
 $$
-\delta\geq\frac{t-r}{r-s}
+\delta \geq \frac{t-r}{r-s}
 $$
 
 である．
@@ -652,10 +650,7 @@ $$
 
 $$
 \underline{v}_i
-=
-\min_{a_j\in A_j}
-\max_{a_i\in A_i}
-u_i(a_i,a_j)
+=\min_{a_j\in A_j}\max_{a_i\in A_i}u_i(a_i,a_j)
 $$
 
 で表される．
@@ -664,10 +659,8 @@ $$
 
 $$
 \underline{v}_i
-=
-\min\{\max\{5,7\}, \max\{0,1\}\}
-=
-\min\{7,1\}
+=\min\{\max\{5,7\}, \max\{0,1\}\}
+=\min\{7,1\}
 =1
 $$
 
@@ -715,15 +708,13 @@ $$
 したがって，
 
 $$
-\frac{5}{1-\delta}
-\geq
-7+\frac{\delta}{1-\delta}
+\frac{5}{1-\delta} \geq 7+\frac{\delta}{1-\delta}
 $$
 
 すなわち
 
 $$
-\delta\geq \frac{1}{3}
+\delta \geq \frac{1}{3}
 $$
 
 であれば，協力から離脱する誘因はなくなる．
@@ -734,18 +725,14 @@ $$
 このとき，約束を守る条件は
 
 $$
-\frac{u_i}{1-\delta}
-\geq
-v_i+\frac{\delta}{1-\delta}
+\frac{u_i}{1-\delta} \geq v_i+\frac{\delta}{1-\delta}
 $$
 
 である．
 これを整理すると，
 
 $$
-\delta
-\geq
-\frac{v_i-u_i}{v_i-1}
+\delta \geq \frac{v_i-u_i}{v_i-1}
 $$
 
 となる．
@@ -950,8 +937,7 @@ $$
 
 $$
 t+\delta p+\delta^2p+\cdots
-=
-t+\frac{\delta p}{1-\delta}
+= t+\frac{\delta p}{1-\delta}
 $$
 
 である．
@@ -959,8 +945,7 @@ $$
 
 $$
 (1-\delta)t+\delta p
-=
-t-\delta(t-p)
+= t-\delta(t-p)
 $$
 
 となる．
@@ -969,8 +954,7 @@ $$
 
 $$
 s+\delta p+\delta^2p+\cdots
-=
-s+\frac{\delta p}{1-\delta}
+= s+\frac{\delta p}{1-\delta}
 $$
 
 である．
@@ -978,8 +962,7 @@ $$
 
 $$
 (1-\delta)s+\delta p
-=
-s+\delta(p-s)
+= s+\delta(p-s)
 $$
 
 となる．
@@ -998,7 +981,7 @@ $$
 1. 相手が All-C を選んだときの最適応答を求めよ．
 2. 相手が All-D を選んだときの最適応答を求めよ．
 3. 相手がトリガー戦略を選んだとき，トリガー戦略が All-D 以上の利得を与えるための $\delta$ の条件を求めよ．
-4. $\delta\geq \frac{t-r}{t-p}$ のとき，この限定された戦略集合の中でナッシュ均衡となる戦略の組を挙げよ．
+4. $\delta \geq \frac{t-r}{t-p}$ のとき，この限定された戦略集合の中でナッシュ均衡となる戦略の組を挙げよ．
 ````
 
 ```{dropdown} 発展問題2 解答例
@@ -1018,7 +1001,7 @@ s+\delta(p-s)
 $$
 
 である．
-$0\leq\delta<1$ かつ $p>s$ なので，
+$0 \leq \delta<1$ かつ $p>s$ なので，
 
 $$
 s+\delta(p-s)<p
@@ -1040,14 +1023,14 @@ $$
 トリガー戦略が All-D 以上の利得を与えるには，
 
 $$
-r\geq t-\delta(t-p)
+r \geq t-\delta(t-p)
 $$
 
 が必要である．
 これを整理すると，
 
 $$
-\delta\geq \frac{t-r}{t-p}
+\delta \geq \frac{t-r}{t-p}
 $$
 
 である．
@@ -1056,7 +1039,7 @@ $$
 
 相手が All-D を選ぶときの最適応答は All-D であるため，$(\text{All-D},\text{All-D})$ はナッシュ均衡である．
 
-また，$\delta\geq \frac{t-r}{t-p}$ のとき，相手がトリガー戦略またはしっぺ返し戦略を選ぶなら，自分もトリガー戦略またはしっぺ返し戦略を選ぶことが最適応答になる．
+また，$\delta \geq \frac{t-r}{t-p}$ のとき，相手がトリガー戦略またはしっぺ返し戦略を選ぶなら，自分もトリガー戦略またはしっぺ返し戦略を選ぶことが最適応答になる．
 したがって，
 
 $$
