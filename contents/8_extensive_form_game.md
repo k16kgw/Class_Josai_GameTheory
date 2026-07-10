@@ -29,7 +29,7 @@
 - 展開型ゲーム
 - ゲーム木・意思決定点・枝・終点・履歴・情報集合
 - 完全情報ゲーム・後ろ向き帰納法
-- 部分ゲーム・部分ゲーム完全均衡・信頼できない脅し
+- 部分ゲーム・部分ゲーム完全均衡・信憑性のない脅し
 
 ---
 
@@ -292,6 +292,7 @@ $$
 
 1. プレイヤー1の戦略集合を求めよ．
 2. プレイヤー2の戦略集合を求めよ．
+3. 展開型ゲームにおける戦略が条件付きの行動計画である理由を説明せよ．
 ````
 
 ```{dropdown} <span style="color:red">演習2 解答例</span>
@@ -312,7 +313,7 @@ $$
 したがって，プレイヤー2の戦略は $(A\text{の後の行動},B\text{の後の行動})$ として表せ，戦略集合は
 
 $$
-S_2=\{(C,E),(C,F),(D,E),(D,F)\}
+S_2=\{(C,D),(C,E),(C,F)\}
 $$
 
 である．
@@ -465,7 +466,7 @@ $100-x>0$ なら，プレイヤー2は受け入れる方がよい．
 この戦略型ゲームのナッシュ均衡は
 
 $$
-(\text{参入する},\text{受け入れる}), (\text{参入しない},\text{対抗する})
+(\text{参入する},\text{協調}), (\text{参入しない},\text{対立})
 $$
 
 である．
@@ -761,7 +762,7 @@ $$
 - 展開型ゲームにおける戦略：行動する可能性のあるすべての意思決定点での行動計画
 - 完全情報の有限展開型ゲームでは後ろ向き帰納法によって解を求められる
 - 展開型ゲームは各プレイヤーの戦略を列挙すれば戦略型ゲームに変換できる
-- ナッシュ均衡には信頼できない脅しを含むものがある．
+- ナッシュ均衡には信憑性のない脅しを含むものがある．
 - 部分ゲーム完全均衡はすべての部分ゲームで合理的な行動を要求する均衡概念である．
 
 第9回は繰り返しゲームを扱う．  
@@ -777,38 +778,38 @@ $$
 ```python
 payoffs = {
     "not_enter": (1, 5),
-    "enter_accept": (3, 3),
-    "enter_fight": (0, 1),
+    "enter_cooperate": (2, 2),
+    "enter_conflict": (0, 0),
 }
 
-incumbent_actions = {
-    "accept": payoffs["enter_accept"],
-    "fight": payoffs["enter_fight"],
+chain_store_actions = {
+    "cooperate": payoffs["enter_cooperate"],
+    "conflict": payoffs["enter_conflict"],
 }
 
-incumbent_choice = max(
-    incumbent_actions,
-    key=lambda action: incumbent_actions[action][1]
+chain_store_choice = max(
+    chain_store_actions,
+    key=lambda action: chain_store_actions[action][1]
 )
 
-payoff_after_entry = incumbent_actions[incumbent_choice]
+payoff_after_entry = chain_store_actions[chain_store_choice]
 
-entrant_actions = {
+investor_actions = {
     "not_enter": payoffs["not_enter"],
     "enter": payoff_after_entry,
 }
 
-entrant_choice = max(
-    entrant_actions,
-    key=lambda action: entrant_actions[action][0]
+investor_choice = max(
+    investor_actions,
+    key=lambda action: investor_actions[action][0]
 )
 
-print("既存企業の選択:", incumbent_choice)
-print("新規企業の選択:", entrant_choice)
-print("結果の利得:", entrant_actions[entrant_choice])
+print("チェーンストアの選択:", chain_store_choice)
+print("投資家の選択:", investor_choice)
+print("結果の利得:", investor_actions[investor_choice])
 ```
 
-このコードでは，まず既存企業の最適行動を求め，その結果を新規企業の意思決定に戻している．
+このコードでは，まずチェーンストアの最適行動を求め，その結果を投資家の意思決定に戻している．
 
 ---
 
@@ -937,7 +938,7 @@ $$
 が部分ゲーム完全均衡である．
 ```
 
-```{note} 発展問題2：参入阻止と信頼できない脅し
+```{note} 発展問題2：参入阻止と信憑性のない脅し
 新規企業と既存企業の参入ゲームを考える．
 新規企業は最初に「参入する」か「参入しない」かを選ぶ．
 新規企業が参入した場合，既存企業は「受け入れる」か「対抗する」かを選ぶ．
@@ -957,7 +958,7 @@ $$
 2. $k>1$ のとき，後ろ向き帰納法による結果を求めよ．
 3. $k<1$ のとき，後ろ向き帰納法による結果を求めよ．
 4. 戦略型表現における純戦略ナッシュ均衡を $k>1$ と $k<1$ に分けて求めよ．
-5. $k>1$ のとき，信頼できない脅しを含むナッシュ均衡を説明せよ．
+5. $k>1$ のとき，信憑性のない脅しを含むナッシュ均衡を説明せよ．
 ```
 
 ```{dropdown} 発展問題2 解答例
@@ -1078,7 +1079,7 @@ $$
 
 である．
 
-**5．信頼できない脅し**
+**5．信憑性のない脅し**
 
 $k>1$ のとき，
 
@@ -1088,7 +1089,7 @@ $$
 
 はナッシュ均衡である．
 しかし，実際に新規企業が参入した後には，既存企業は対抗するより受け入れる方が高い利得を得る．
-したがって，「参入したら対抗する」という脅しは信頼できない脅しである．
+したがって，「参入したら対抗する」という脅しは信憑性のない脅しである．
 このナッシュ均衡は部分ゲーム完全均衡ではない．
 ```
 
