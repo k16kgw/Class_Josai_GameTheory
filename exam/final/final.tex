@@ -1,0 +1,340 @@
+% !TEX program = lualatex
+\documentclass[10pt,a4paper]{ltjsarticle}
+
+\usepackage[top=10mm,bottom=10mm,left=16mm,right=16mm,footskip=3mm]{geometry}
+\usepackage{amsmath,amssymb,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.15em}
+\setlength{\abovedisplayskip}{0.25em}
+\setlength{\belowdisplayskip}{0.25em}
+\setlength{\fboxsep}{1.5mm}
+\renewcommand{\arraystretch}{1.25}
+\setlist[enumerate]{label=(\arabic*),leftmargin=*,itemsep=0.05em,topsep=0.1em}
+
+% 解答例の表示切り替え：0=OFF（問題用），1=ON（解答例入り）
+\providecommand{\showanswers}{0}
+
+\newcommand{\points}[1]{\hfill{\small（#1点）}}
+\newcommand{\question}[2]{%
+  \par\vspace{0.45em}
+  {\large\bfseries #1}\points{#2}\par\vspace{0.15em}
+}
+\newcommand{\answerbox}[2]{%
+  \par\vspace{0.25em}
+  \noindent\fbox{%
+    \begin{minipage}[t][#1][t]{0.975\linewidth}
+      {\small\textbf{解答欄}}
+      \ifnum\showanswers=1
+        \par\vspace{0.2em}
+        {\color{red}#2}
+      \fi
+    \end{minipage}%
+  }%
+  \par\vspace{0.25em}
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE 2026年度 前期 ゲーム理論 期末試験}\\[-0.2em]
+  {担当教員：香川渓一郎}\\[-0.1em]
+  {試験日時：2026年7月27日（月）4限 15:20--16:20}
+\end{center}
+
+\begin{tabular}{|p{0.35\linewidth}|p{0.35\linewidth}|p{0.20\linewidth}|}
+  \hline
+  学籍番号 & 氏名 & 得点（30点満点） \\
+  \hline
+   & & \\
+   & & \\
+  \hline
+\end{tabular}
+
+\vspace{0.3em}
+問題は全6問4ページある．落丁があった場合は直ちに試験官に知らせること．\\
+注1：誤答であっても途中式や考え方によって加点することがある．\\
+注2：解答欄が足りない場合は裏面に解答しても良い．
+
+\question{第1問：後ろ向き帰納法}{4}
+次のレディファーストの展開型ゲームを考える．
+女性が先に水族館または博物館を選び，その後に男性が水族館または博物館を選ぶ．
+利得は次のように定められている．
+\[
+\begin{array}{c|cc}
+ & \text{男性：水族館} & \text{男性：博物館} \\ \hline
+\text{女性：水族館} & (2,1) & (0,0) \\
+\text{女性：博物館} & (0,0) & (1,2)
+\end{array}
+\]
+ただし，左が女性の利得，右が男性の利得である．
+\begin{enumerate}
+  \item 女性が水族館を選んだ場合，男性は何を選ぶか．
+  \item 女性が博物館を選んだ場合，男性は何を選ぶか．
+  \item それを予想した女性は何を選ぶか．
+  \item 後ろ向き帰納法による結果と利得を答えよ．
+\end{enumerate}
+\answerbox{46mm}{%
+\begin{enumerate}[label=(\arabic*)]
+  \item 女性が水族館を選んだ場合，男性は水族館なら利得1，博物館なら利得0なので，水族館を選ぶ．
+  \item 女性が博物館を選んだ場合，男性は水族館なら利得0，博物館なら利得2なので，博物館を選ぶ．
+  \item 女性は，水族館を選べば利得2，博物館を選べば利得1になると予想する．したがって，水族館を選ぶ．
+  \item 後ろ向き帰納法による結果は，女性が水族館を選び，男性も水族館を選ぶことである．利得は $(2,1)$ である．
+\end{enumerate}
+}
+
+\question{第2問：ベイズの定理による信念の更新}{4}
+ある応募者が高能力タイプ $H$ である事前確率を $0.3$，低能力タイプ $L$ である事前確率を $0.7$ とする．
+高能力タイプが資格 $Q$ を取得する確率と，低能力タイプが資格 $Q$ を取得する確率は，
+\[
+  P(Q\mid H)=0.8,\qquad P(Q\mid L)=0.2
+\]
+である．
+\begin{enumerate}
+  \item 応募者が資格を取得している確率 $P(Q)$ を求めよ．
+  \item 資格を取得していることを観察したとき，応募者が高能力タイプである事後確率 $P(H\mid Q)$ を求めよ．
+  \item 資格の観察によって，高能力タイプである確率は上昇したか，低下したか．
+\end{enumerate}
+\answerbox{44mm}{%
+\begin{enumerate}[label=(\arabic*)]
+  \item
+  \[
+    P(Q)=P(Q\mid H)P(H)+P(Q\mid L)P(L)
+    =0.8\cdot0.3+0.2\cdot0.7=0.38.
+  \]
+  \item ベイズの定理より，
+  \[
+    P(H\mid Q)
+    =\frac{P(Q\mid H)P(H)}{P(Q)}
+    =\frac{0.8\cdot0.3}{0.38}
+    =\frac{12}{19}.
+  \]
+  \item 事前確率は $0.3$ であり，事後確率は $\frac{12}{19}\simeq0.632$ なので，高能力タイプである確率は上昇した．
+\end{enumerate}
+}
+
+\newpage
+
+\question{第3問：ナッシュ交渉解}{5}
+不一致点を $d=(30,10)$ とする．
+パレート最適な境界が
+\[
+  u_2=-2u_1+120
+\]
+で与えられている交渉問題を考える．
+\begin{enumerate}
+  \item ナッシュ積を $u_1$ だけの式で表せ．
+  \item ナッシュ積を最大にする $u_1$ を求めよ．
+  \item ナッシュ交渉解を求めよ．
+\end{enumerate}
+\answerbox{62mm}{%
+\begin{enumerate}[label=(\arabic*)]
+  \item 不一致点は $(30,10)$ なので，ナッシュ積は
+  \[
+    (u_1-30)(u_2-10)
+  \]
+  である．$u_2=-2u_1+120$ を代入すると，
+  \[
+    P(u_1)=(u_1-30)(110-2u_1)
+  \]
+  である．
+  \item 微分すると，
+  \[
+    \frac{dP}{du_1}=(110-2u_1)-2(u_1-30)=170-4u_1
+  \]
+  である．$170-4u_1=0$ より，
+  \[
+    u_1=\frac{85}{2}
+  \]
+  である．また，$\frac{d^2P}{du_1^2}=-4<0$ なので，この点でナッシュ積は最大になる．
+  \item $u_1=85/2$ を代入すると，
+  \[
+    u_2=-2\cdot\frac{85}{2}+120=35
+  \]
+  である．したがって，ナッシュ交渉解は
+  \[
+    \left(\frac{85}{2},35\right)
+  \]
+  である．
+\end{enumerate}
+}
+
+\question{第4問：3人対称ゲームのコア}{5}
+3人のプレイヤー $A,B,C$ が同じ役割をもつ協力ゲームを考える．
+1人だけでは価値を生まず，どの2人提携も同じ価値 $a$ を生み，3人全員の提携は価値1を生むとする．
+すなわち，プレイヤー集合を $N=\{A,B,C\}$ とし，特性関数を
+\[
+v(\{A\})=v(\{B\})=v(\{C\})=0,
+\]
+\[
+v(\{A,B\})=v(\{A,C\})=v(\{B,C\})=a,
+\]
+\[
+v(N)=1
+\]
+とする．ただし，$0<a<1$ とする．
+\begin{enumerate}
+  \item コアに含まれる配分 $x=(x_A,x_B,x_C)$ が満たす条件を書け．
+  \item コアが存在するためには $a\le 2/3$ が必要であることを示せ．
+  \item $a\le 2/3$ のとき，均等配分 $(1/3,1/3,1/3)$ がコアに含まれることを示せ．
+  \item コアが存在するための必要十分条件を答えよ．
+\end{enumerate}
+\answerbox{70mm}{%
+\begin{enumerate}[label=(\arabic*)]
+  \item コアに含まれる配分は，
+  \[
+    x_A+x_B+x_C=1
+  \]
+  および
+  \[
+    x_A+x_B\ge a,\quad x_A+x_C\ge a,\quad x_B+x_C\ge a,
+  \]
+  \[
+    x_A\ge0,\quad x_B\ge0,\quad x_C\ge0
+  \]
+  を満たす．
+  \item 3つの2人提携の条件を加えると，
+  \[
+    2(x_A+x_B+x_C)\ge 3a
+  \]
+  である．$x_A+x_B+x_C=1$ より，
+  \[
+    2\ge 3a
+  \]
+  が必要である．したがって，$a\le 2/3$ が必要である．
+  \item 均等配分では，任意の2人提携が受け取る利得の合計は
+  \[
+    \frac13+\frac13=\frac23
+  \]
+  である．$a\le 2/3$ なら，すべての2人提携について提携合理性を満たす．また，個人合理性とパレート最適性も満たすので，均等配分はコアに含まれる．
+  \item $a\le 2/3$ は必要であり，この条件のもとでは均等配分がコアに含まれるため十分でもある．したがって，必要十分条件は
+  \[
+    a\le\frac23
+  \]
+  である．
+\end{enumerate}
+}
+
+\newpage
+
+\question{第5問：繰り返し囚人のジレンマ}{6}
+次のステージゲームを無限回繰り返す囚人のジレンマを考える．
+各期の利得を割引因子 $\delta$ で割り引く．
+\[
+\begin{array}{c|cc}
+1\backslash 2 & C & D \\ \hline
+C & (5,5) & (0,8) \\
+D & (8,0) & (2,2)
+\end{array}
+\]
+両プレイヤーがトリガー戦略を用いるとする．
+すなわち，最初は $C$ を選び，相手が一度でも $D$ を選んだら，それ以降はずっと $D$ を選ぶ．
+\begin{enumerate}
+  \item 協力を続ける場合の割引利得和を求めよ．
+  \item 今回だけ裏切る場合の割引利得和を求めよ．
+  \item トリガー戦略によって協力が維持されるための $\delta$ の条件を求めよ．
+  \item この条件に，$(C,D)$ で協力した側が得る利得 $0$ が現れない理由を説明せよ．
+\end{enumerate}
+\answerbox{182mm}{%
+\begin{enumerate}[label=(\arabic*)]
+  \item 協力を続けると毎期5を得るので，割引利得和は
+  \[
+    5+\delta5+\delta^2 5+\cdots
+    =\frac{5}{1-\delta}
+  \]
+  である．
+  \item 今回だけ裏切ると，今期は8を得る．次期以降は相手がずっと裏切るため，毎期2を得る．したがって，割引利得和は
+  \[
+    8+\delta2+\delta^2 2+\cdots
+    =
+    8+\frac{2\delta}{1-\delta}
+  \]
+  である．
+  \item 協力が維持されるためには，
+  \[
+    \frac{5}{1-\delta}
+    \ge
+    8+\frac{2\delta}{1-\delta}
+  \]
+  が必要である．両辺に $1-\delta>0$ をかけると，
+  \[
+    5\ge 8(1-\delta)+2\delta
+  \]
+  である．よって，
+  \[
+    5\ge 8-6\delta
+  \]
+  なので，
+  \[
+    \delta\ge\frac12
+  \]
+  である．
+  \item 今回だけ裏切るかどうかを考えるプレイヤーは，協力した場合の利得5と，裏切った場合の利得8を比較している．$(C,D)$ で協力した側の利得0は，相手に裏切られた側の利得であり，自分が一方的に裏切る誘因を比較する式には現れない．
+\end{enumerate}
+}
+
+\newpage
+
+\question{第6問：一般の2戦略進化ゲーム}{6}
+対称2人ゲームの利得行列を次のように表す．
+\[
+\begin{array}{c|cc}
+\text{自分}\backslash\text{相手} & A & B \\ \hline
+A & a & b \\
+B & c & d
+\end{array}
+\]
+集団内の戦略 $A$ の比率を $x$，戦略 $B$ の比率を $1-x$ とする．
+\begin{enumerate}
+  \item 戦略 $A$ と戦略 $B$ の期待適応度 $u_A(x)$，$u_B(x)$ を求めよ．
+  \item 内点の定常状態 $x^\ast$ を求めよ．ただし，分母が0でなく，$0<x^\ast<1$ となる場合を考えればよい．
+  \item レプリケータダイナミクスにおいて，内点の定常状態 $x^\ast$ が安定となる条件を求めよ．
+\end{enumerate}
+\answerbox{182mm}{%
+\begin{enumerate}[label=(\arabic*)]
+  \item 戦略 $A$ の期待適応度は
+  \[
+    u_A(x)=ax+b(1-x)
+  \]
+  である．戦略 $B$ の期待適応度は
+  \[
+    u_B(x)=cx+d(1-x)
+  \]
+  である．
+  \item 内点の定常状態では $u_A(x)=u_B(x)$ である．したがって，
+  \[
+    ax+b(1-x)=cx+d(1-x)
+  \]
+  を解けばよい．整理すると，
+  \[
+    (a-b-c+d)x=d-b
+  \]
+  なので，
+  \[
+    x^\ast=\frac{d-b}{a-b-c+d}
+  \]
+  である．
+  \item 適応度差は
+  \[
+    u_A(x)-u_B(x)
+    =(a-b-c+d)x+(b-d)
+  \]
+  である．レプリケータダイナミクスの右辺を
+  \[
+    F(x)=x(1-x)\{u_A(x)-u_B(x)\}
+  \]
+  とおく．内点の定常状態では $u_A(x^\ast)-u_B(x^\ast)=0$ なので，
+  \[
+    F'(x^\ast)=x^\ast(1-x^\ast)(a-b-c+d)
+  \]
+  である．$0<x^\ast<1$ なので，$x^\ast(1-x^\ast)>0$ である．したがって，$x^\ast$ が安定となる条件は
+  \[
+    a-b-c+d<0
+  \]
+  である．
+\end{enumerate}
+}
+
+\end{document}
