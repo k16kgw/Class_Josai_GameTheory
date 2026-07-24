@@ -3,6 +3,7 @@
 
 \usepackage[top=10mm,bottom=10mm,left=16mm,right=16mm,footskip=3mm]{geometry}
 \usepackage{amsmath,amssymb,array}
+\usepackage{diagbox}
 \usepackage{enumitem}
 \usepackage{xcolor}
 
@@ -54,38 +55,43 @@
 \end{tabular}
 
 \vspace{0.3em}
-問題は全6問4ページある．落丁があった場合は直ちに試験官に知らせること．\\
+問題は全6問5ページある．落丁があった場合は直ちに試験官に知らせること．\\
 注1：誤答であっても途中式や考え方によって加点することがある．\\
 注2：解答欄が足りない場合は裏面に解答しても良い．
 
-\question{第1問：後ろ向き帰納法}{4}
+\question{第1問：後ろ向き帰納法}{5}
+\begin{minipage}[t]{0.58\linewidth}
+\vspace{0pt}
 次のレディファーストの展開型ゲームを考える．
 女性が先に水族館または博物館を選び，その後に男性が水族館または博物館を選ぶ．
-利得は次のように定められている．
-\[
-\begin{array}{c|cc}
- & \text{男性：水族館} & \text{男性：博物館} \\ \hline
-\text{女性：水族館} & (2,1) & (0,0) \\
-\text{女性：博物館} & (0,0) & (1,2)
-\end{array}
-\]
-ただし，左が女性の利得，右が男性の利得である．
+ただし，利得は$(\text{女性の利得}, \text{男性の利得})$のように表している．
 \begin{enumerate}
   \item 女性が水族館を選んだ場合，男性は何を選ぶか．
   \item 女性が博物館を選んだ場合，男性は何を選ぶか．
   \item それを予想した女性は何を選ぶか．
-  \item 後ろ向き帰納法による結果と利得を答えよ．
+  \item 後ろ向き帰納法によって選ばれる戦略の組とその利得を答えよ．
 \end{enumerate}
-\answerbox{46mm}{%
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.38\linewidth}
+\vspace{0pt}
+\centering
+\begin{tabular}{c|cc}
+\diagbox[width=22mm]{女性}{男性} & \text{水族館} & \text{博物館} \\ \hline
+\text{水族館} & $(2,1)$ & $(0,0)$ \\
+\text{博物館} & $(0,0)$ & $(1,2)$
+\end{tabular}
+\end{minipage}
+\answerbox{50mm}{%
 \begin{enumerate}[label=(\arabic*)]
   \item 女性が水族館を選んだ場合，男性は水族館なら利得1，博物館なら利得0なので，水族館を選ぶ．
   \item 女性が博物館を選んだ場合，男性は水族館なら利得0，博物館なら利得2なので，博物館を選ぶ．
   \item 女性は，水族館を選べば利得2，博物館を選べば利得1になると予想する．したがって，水族館を選ぶ．
-  \item 後ろ向き帰納法による結果は，女性が水族館を選び，男性も水族館を選ぶことである．利得は $(2,1)$ である．
+  \item 後ろ向き帰納法によって選ばれる戦略の組は，女性が水族館，男性が水族館である．利得は $(2,1)$ である．
 \end{enumerate}
 }
 
-\question{第2問：ベイズの定理による信念の更新}{4}
+\question{第2問：ベイズの定理による信念の更新}{3}
 ある応募者が高能力タイプ $H$ である事前確率を $0.3$，低能力タイプ $L$ である事前確率を $0.7$ とする．
 高能力タイプが資格 $Q$ を取得する確率と，低能力タイプが資格 $Q$ を取得する確率は，
 \[
@@ -97,7 +103,7 @@
   \item 資格を取得していることを観察したとき，応募者が高能力タイプである事後確率 $P(H\mid Q)$ を求めよ．
   \item 資格の観察によって，高能力タイプである確率は上昇したか，低下したか．
 \end{enumerate}
-\answerbox{44mm}{%
+\answerbox{42mm}{%
 \begin{enumerate}[label=(\arabic*)]
   \item
   \[
@@ -129,7 +135,7 @@
   \item ナッシュ積を最大にする $u_1$ を求めよ．
   \item ナッシュ交渉解を求めよ．
 \end{enumerate}
-\answerbox{62mm}{%
+\answerbox{168mm}{%
 \begin{enumerate}[label=(\arabic*)]
   \item 不一致点は $(30,10)$ なので，ナッシュ積は
   \[
@@ -161,6 +167,8 @@
 \end{enumerate}
 }
 
+\newpage
+
 \question{第4問：3人対称ゲームのコア}{5}
 3人のプレイヤー $A,B,C$ が同じ役割をもつ協力ゲームを考える．
 1人だけでは価値を生まず，どの2人提携も同じ価値 $a$ を生み，3人全員の提携は価値1を生むとする．
@@ -181,7 +189,7 @@ v(N)=1
   \item $a\le 2/3$ のとき，均等配分 $(1/3,1/3,1/3)$ がコアに含まれることを示せ．
   \item コアが存在するための必要十分条件を答えよ．
 \end{enumerate}
-\answerbox{70mm}{%
+\answerbox{122mm}{%
 \begin{enumerate}[label=(\arabic*)]
   \item コアに含まれる配分は，
   \[
@@ -222,13 +230,13 @@ v(N)=1
 \question{第5問：繰り返し囚人のジレンマ}{6}
 次のステージゲームを無限回繰り返す囚人のジレンマを考える．
 各期の利得を割引因子 $\delta$ で割り引く．
-\[
-\begin{array}{c|cc}
-1\backslash 2 & C & D \\ \hline
-C & (5,5) & (0,8) \\
-D & (8,0) & (2,2)
-\end{array}
-\]
+\begin{center}
+\begin{tabular}{c|cc}
+\diagbox[width=14mm]{1}{2} & C & D \\ \hline
+C & $(5,5)$ & $(0,8)$ \\
+D & $(8,0)$ & $(2,2)$
+\end{tabular}
+\end{center}
 両プレイヤーがトリガー戦略を用いるとする．
 すなわち，最初は $C$ を選び，相手が一度でも $D$ を選んだら，それ以降はずっと $D$ を選ぶ．
 \begin{enumerate}
@@ -279,13 +287,13 @@ D & (8,0) & (2,2)
 
 \question{第6問：一般の2戦略進化ゲーム}{6}
 対称2人ゲームの利得行列を次のように表す．
-\[
-\begin{array}{c|cc}
-\text{自分}\backslash\text{相手} & A & B \\ \hline
-A & a & b \\
-B & c & d
-\end{array}
-\]
+\begin{center}
+\begin{tabular}{c|cc}
+\diagbox[width=22mm]{自分}{相手} & A & B \\ \hline
+A & $a$ & $b$ \\
+B & $c$ & $d$
+\end{tabular}
+\end{center}
 集団内の戦略 $A$ の比率を $x$，戦略 $B$ の比率を $1-x$ とする．
 \begin{enumerate}
   \item 戦略 $A$ と戦略 $B$ の期待適応度 $u_A(x)$，$u_B(x)$ を求めよ．
